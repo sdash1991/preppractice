@@ -24,14 +24,64 @@ println(multiplier(5))
 //Monad in scala :
 //types of MOnad :
 1.Identity Monad
-Option Monad 
-Either	Monad
-Future	Monad
-List	Monad
-Reader	Monad
-Writer	Monad
-State	Monad
-IO	Monad
+
+val x = 5
+val result = x.flatMap(y => y + 1)
+
+2. Option Monad 
+
+val result = Some(10).flatMap(x => Some(x + 5)) 
+
+3.Either Monad
+Right(value) for success, Left(error) for failure.
+
+val result: Either[String, Int] = Right(10).flatMap(x => Right(x * 2))
+
+4.Future	Monad-- used for async compution
+
+ val result = Future(10).flatMap(x => Future(x * 2))
+
+5.List	Monad
+6.Reader	Monad
+7.Writer	Monad
+8.State	Monad
+9.IO	Monad
+
+//foldLeft() function in scala
+
+val numbers = List(1, 2, 3, 4, 5)
+
+val sum = numbers.foldLeft(0)((acc, x) => acc + x)
+
+println(sum)
+
+--need initial value 
+
+//foldRight()
+it's oppsite of foldLeft fuction starting from right side with initial value.
+
+//reduceLeft()
+--same as foldLeft but no initial value 
+
+val nums = List(1, 2, 3)
+nums.reduceLeft(_ + _)
+
+//scanLeft()
+works as foldLeft but it reurns a result as a collection 
+val nums = List(1, 2, 3)
+nums.scanLeft(0)(_ + _)
+
+output : List(0, 1, 3, 6)
+
+// How to handles errorin Future 
+
+
+
+
+
+
+
+
 
 
 
