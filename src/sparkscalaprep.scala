@@ -15,7 +15,7 @@ addcurried(2)(3)
 
 //closure in scala :
 
-var factor = 3
+var factor = 2
 
 val multiplier = (x: Int) => x * factor
 
@@ -74,6 +74,119 @@ nums.scanLeft(0)(_ + _)
 output : List(0, 1, 3, 6)
 
 // How to handles errorin Future 
+
+
+val f = Future { 1 / 0 }  // Will throw ArithmeticException
+
+val recovered = f.recover {
+  case _: ArithmeticException => 0
+}
+
+
+//example 2 using try catch 
+
+val f = Future {
+  try {
+    // May throw
+    1 / 0
+  } catch {
+    case _: ArithmeticException => 0
+  }
+}
+
+
+//Trait in scala 
+
+trait Greeter {
+  def greet(name: String): String  
+
+  def defaultGreeting(): String = "Hello"  
+}
+
+class Person extends Greeter {
+  def greet(name: String): String = s"${defaultGreeting()}, $name"
+}
+
+//sealed trait in scala 
+
+Sealed trait in Scala is a special kind of trait that restricts subclassing to the same file where the trait is defined
+
+sealed trait Animal
+case class Dog(name: String) extends Animal
+case class Cat(name: String) extends Animal
+
+
+//Pattern matching in scala 
+
+val x = 2
+
+val result = x match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "other"   // wildcard to match anything
+}
+
+-- using case classs 
+
+sealed trait Animal
+case class Dog(name: String) extends Animal
+case class Cat(name: String) extends Animal
+
+def speak(animal: Animal): String = animal match {
+  case Dog(name) => s"Woof! I’m $name"
+  case Cat(name) => s"Meow! I’m $name"
+}
+
+//Extractor Object in scala 
+
+
+object EmailExtractor {
+  def unapply(email: String): Option[(String, String)] = {
+    val parts = email.split("@")
+    if (parts.length == 2) Some((parts(0), parts(1)))
+    else None
+  }
+}
+
+val email = "alice@example.com"
+
+email match {
+  case EmailExtractor(user, domain) =>
+    println(s"User: $user, Domain: $domain")
+  case _ =>
+    println("Not a valid email")
+}
+
+//How to Create and Use a UDF in Scala
+
+//apply and unapply method in scala
+
+class Person(val name: String, val age: Int)
+
+object Person {
+  def apply(name: String, age: Int): Person = new Person(name, age)
+}
+
+
+//The unapply method is used for deconstructing objects — it’s the opposite of apply. It's mostly used in pattern matching. 
+
+class Person(val name: String, val age: Int)
+
+object Person {
+  def apply(name: String, age: Int): Person = new Person(name, age)
+  def unapply(p: Person): Option[(String, Int)] = Some((p.name, p.age))
+}
+
+val person = Person("Bob", 25)
+
+person match {
+  case Person(n, a) => println(s"Name: $n, Age: $a")
+}
+
+//
+
+
+
 
 
 
