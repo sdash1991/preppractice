@@ -200,13 +200,13 @@ person match {
 
 //Find Users Who Logged In Consecutively for 3 Days
 val df = Seq(
-  ("user1", "2024-01-01"),
-  ("user1", "2024-01-02"),
-  ("user1", "2024-01-03"),
-  ("user1", "2024-01-05"),
-  ("user2", "2024-01-01"),
-  ("user2", "2024-01-03"),
-  ("user2", "2024-01-04")
+  ("user1", "2025-01-01"),
+  ("user1", "2025-01-02"),
+  ("user1", "2025-01-03"),
+  ("user1", "2025-01-05"),
+  ("user2", "2025-01-01"),
+  ("user2", "2025-01-03"),
+  ("user2", "2025-01-04")
 ).toDF("user", "login_date")
   .withColumn("login_date", to_date($"login_date"))
 
